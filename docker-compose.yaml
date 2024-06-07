@@ -1,0 +1,37 @@
+volumes:
+  cache:
+    driver: local
+
+services:
+  app:
+    build:
+      context: .
+    container_name: test-service
+    depends_on:
+      - postgresql
+      - redis
+    environment:
+      SPRING_PROFILES_ACTIVE: ${ACTIVE_PROFILE}
+  postgresql:
+    image: postgres
+    restart: always
+    container_name: test-postgres
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+  redis:
+    image: redis:latest
+    restart: always
+    container_name: test-redis
+    ports:
+      - '6379:6379'
+    environment:
+      REDIS_HOST: localhost
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${PASSWORD}
+    command: redis-server --save 20 1 --loglevel warning --requirepass ${PASSWORD}
+    volumes:
+      - cache:/data
