@@ -2,6 +2,7 @@ package com.w4t3rcs.test.service.impl;
 
 import com.w4t3rcs.test.dto.UserDto;
 import com.w4t3rcs.test.entity.User;
+import com.w4t3rcs.test.exception.UserNotFoundException;
 import com.w4t3rcs.test.repository.UserRepository;
 import com.w4t3rcs.test.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -38,14 +39,14 @@ public class UserServiceImpl implements UserService {
     @Cacheable(value = "UserService::getUser", key = "#id")
     public UserDto getUser(Long id) {
         return UserDto.fromUser(userRepository.findById(id)
-                .orElseThrow());
+                .orElseThrow(UserNotFoundException::new));
     }
 
     @Override
     @Cacheable(value = "UserService::getUser", key = "#name")
     public UserDto getUser(String name) {
         return UserDto.fromUser(userRepository.findByName(name)
-                .orElseThrow());
+                .orElseThrow(UserNotFoundException::new));
     }
 
     @Override
@@ -54,7 +55,7 @@ public class UserServiceImpl implements UserService {
     })
     public UserDto updateUser(Long id, UserDto userDto) {
         User user = userRepository.findById(id)
-                .orElseThrow();
+                .orElseThrow(UserNotFoundException::new);
 
         if (userDto.getName() != null) user.setName(userDto.getName());
         if (userDto.getPassword() != null) user.setPassword(userDto.getPassword());
