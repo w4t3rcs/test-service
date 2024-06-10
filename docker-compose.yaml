@@ -2,16 +2,11 @@ volumes:
   cache:
     driver: local
 
+networks:
+  elastic:
+    driver: bridge
+
 services:
-  app:
-    build:
-      context: .
-    container_name: test-service
-    depends_on:
-      - postgresql
-      - redis
-    environment:
-      SPRING_PROFILES_ACTIVE: ${ACTIVE_PROFILE}
   postgresql:
     image: postgres
     restart: always
@@ -35,3 +30,26 @@ services:
     command: redis-server --save 20 1 --loglevel warning --requirepass ${PASSWORD}
     volumes:
       - cache:/data
+  elasticsearch:
+    image: elasticsearch:8.8.0
+    restart: always
+    container_name: test-elastic
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    environment:
+      xpack.security.enabled: false
+      discovery.type: single-node
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    networks:
+      - elastic
+  app:
+    build:
+      context: .
+    container_name: test-service
+    depends_on:
+      - postgresql
+      - redis
+      - elasticsearch
+    environment:
+      SPRING_PROFILES_ACTIVE: ${ACTIVE_PROFILE}
