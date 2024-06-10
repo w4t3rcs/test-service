@@ -21,7 +21,6 @@ spring:
         enabled: true
   liquibase:
     change-log: classpath:/db/changelog/changelog-master.yaml
-
   boot:
     admin:
       client:
