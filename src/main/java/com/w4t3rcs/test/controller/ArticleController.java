@@ -2,8 +2,8 @@ package com.w4t3rcs.test.controller;
 
 import com.w4t3rcs.test.dto.ArticleDto;
 import com.w4t3rcs.test.service.ArticleService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,7 +41,7 @@ public class ArticleController {
     }
 
     @PostMapping
-    public ResponseEntity<ArticleDto> postArticle(@RequestBody ArticleDto articleDto) {
+    public ResponseEntity<ArticleDto> postArticle(@Valid @RequestBody ArticleDto articleDto) {
         return ResponseEntity.ok(articleService.createArticle(articleDto));
     }
 }

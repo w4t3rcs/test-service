@@ -1,6 +1,7 @@
 package com.w4t3rcs.test.dto;
 
 import com.w4t3rcs.test.entity.Article;
+import jakarta.validation.Valid;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,7 +13,7 @@ public class ArticleDto {
     private String title;
     private String body;
 
-    public static ArticleDto fromArticle(Article article) {
+    public static ArticleDto fromArticle(@Valid Article article) {
         return ArticleDto.builder()
                 .id(article.getId())
                 .author(article.getAuthor())
@@ -21,6 +22,7 @@ public class ArticleDto {
                 .build();
     }
 
+    @Valid
     public Article toArticle() {
         return Article.builder()
                 .id(this.getId())
