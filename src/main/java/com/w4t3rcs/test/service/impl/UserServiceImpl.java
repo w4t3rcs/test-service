@@ -6,6 +6,7 @@ import com.w4t3rcs.test.exception.UserNotFoundException;
 import com.w4t3rcs.test.repository.UserRepository;
 import com.w4t3rcs.test.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,29 +26,37 @@ public class UserServiceImpl implements UserService {
             @Cacheable(value = "UserService::getUser", key = "#userDto.name")
     })
     public UserDto createUser(UserDto userDto) {
-        return UserDto.fromUser(userRepository.save(userDto.toUser()));
+        UserDto saved = UserDto.fromUser(userRepository.save(userDto.toUser()));
+        log.info("User: \"{}\" has been saved into DB", saved);
+        return saved;
     }
 
     @Override
     public List<UserDto> getUsers() {
-        return userRepository.findAll()
+        List<UserDto> userDtos = userRepository.findAll()
                 .stream()
                 .map(UserDto::fromUser)
                 .toList();
+        log.info("Users have been got from DB");
+        return userDtos;
     }
 
     @Override
     @Cacheable(value = "UserService::getUser", key = "#id")
     public UserDto getUser(Long id) {
-        return UserDto.fromUser(userRepository.findById(id)
+        UserDto userDto = UserDto.fromUser(userRepository.findById(id)
                 .orElseThrow(UserNotFoundException::new));
+        log.info("User by id: \"{}\" has been got from DB", id);
+        return userDto;
     }
 
     @Override
     @Cacheable(value = "UserService::getUser", key = "#name")
     public UserDto getUser(String name) {
-        return UserDto.fromUser(userRepository.findByName(name)
+        UserDto userDto = UserDto.fromUser(userRepository.findByName(name)
                 .orElseThrow(UserNotFoundException::new));
+        log.info("User by name: \"{}\" has been got from DB", name);
+        return userDto;
     }
 
     @Override
@@ -61,12 +71,15 @@ public class UserServiceImpl implements UserService {
         if (userDto.getPassword() != null) user.setPassword(userDto.getPassword());
         if (userDto.getEmail() != null) user.setEmail(userDto.getEmail());
 
-        return UserDto.fromUser(userRepository.save(user));
+        UserDto saved = UserDto.fromUser(userRepository.save(user));
+        log.info("User: \"{}\" has been updated into DB (old version of user: \"{}\")", saved, user);
+        return saved;
     }
 
     @Override
     public Long deleteUser(Long id) {
         userRepository.deleteById(id);
+        log.info("User by id: \"{}\" has been removed from DB", id);
         return id;
     }
 }

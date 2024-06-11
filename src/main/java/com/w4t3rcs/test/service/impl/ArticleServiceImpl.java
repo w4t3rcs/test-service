@@ -1,18 +1,17 @@
 package com.w4t3rcs.test.service.impl;
 
 import com.w4t3rcs.test.dto.ArticleDto;
-import com.w4t3rcs.test.entity.Article;
 import com.w4t3rcs.test.exception.ArticleNotFoundException;
 import com.w4t3rcs.test.repository.ArticleRepository;
 import com.w4t3rcs.test.service.ArticleService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ArticleServiceImpl implements ArticleService {
@@ -20,51 +19,64 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public ArticleDto createArticle(ArticleDto articleDto) {
-        return ArticleDto.fromArticle(articleRepository.save(articleDto.toArticle()));
+        ArticleDto saved = ArticleDto.fromArticle(articleRepository.save(articleDto.toArticle()));
+        log.info("Article: \"{}\" has been saved into DB", saved);
+        return saved;
     }
 
     @Override
     public List<ArticleDto> getArticles() {
-        return articleRepository.findAll(Pageable.ofSize(25))
+        List<ArticleDto> articleDtos = articleRepository.findAll(Pageable.ofSize(25))
                 .stream()
                 .map(ArticleDto::fromArticle)
                 .toList();
+        log.info("Articles have been got from DB");
+        return articleDtos;
     }
 
     @Override
     public List<ArticleDto> getArticlesByAuthor(String author) {
-        return articleRepository.findAllByAuthor(author)
+        List<ArticleDto> articleDtos = articleRepository.findAllByAuthor(author)
                 .stream()
                 .map(ArticleDto::fromArticle)
                 .toList();
+        log.info("Articles by author: \"{}\" have been got from DB", author);
+        return articleDtos;
     }
 
     @Override
     public List<ArticleDto> getArticlesByTitle(String title) {
-        return articleRepository.findAllByTitle(title)
+        List<ArticleDto> articleDtos = articleRepository.findAllByTitle(title)
                 .stream()
                 .map(ArticleDto::fromArticle)
                 .toList();
+        log.info("Articles by title: \"{}\" have been got from DB", title);
+        return articleDtos;
     }
 
     @Override
     public List<ArticleDto> getArticlesByBody(String body) {
-        return articleRepository.findAllByBody(body)
+        List<ArticleDto> articleDtos = articleRepository.findAllByBody(body)
                 .stream()
                 .map(ArticleDto::fromArticle)
                 .toList();
+        log.info("Articles by body: \"{}\" have been got from DB", body);
+        return articleDtos;
     }
 
     @Override
     public ArticleDto getArticleById(String id) {
-        return ArticleDto.fromArticle(articleRepository.findById(id)
+        ArticleDto articleDto = ArticleDto.fromArticle(articleRepository.findById(id)
                 .orElseThrow(ArticleNotFoundException::new));
+        log.info("Article by id: \"{}\" has been got from DB", id);
+        return articleDto;
     }
 
 
     @Override
     public String deleteArticle(String id) {
         articleRepository.deleteById(id);
+        log.info("Article by id: \"{}\" has been removed from DB", id);
         return id;
     }
 }

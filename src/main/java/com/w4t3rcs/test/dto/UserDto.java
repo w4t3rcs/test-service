@@ -1,5 +1,6 @@
 package com.w4t3rcs.test.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.w4t3rcs.test.entity.User;
 import jakarta.validation.Valid;
 import lombok.Builder;
@@ -7,6 +8,7 @@ import lombok.Data;
 
 @Builder
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto {
     private Long id;
     private String name;
