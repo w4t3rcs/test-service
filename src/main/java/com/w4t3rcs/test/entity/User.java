@@ -27,6 +27,8 @@ public class User {
     @Email
     @Column(unique = true)
     private String email;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Override
     public final boolean equals(Object o) {

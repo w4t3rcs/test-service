@@ -70,6 +70,7 @@ public class UserServiceImpl implements UserService {
         if (userDto.getName() != null) user.setName(userDto.getName());
         if (userDto.getPassword() != null) user.setPassword(userDto.getPassword());
         if (userDto.getEmail() != null) user.setEmail(userDto.getEmail());
+        if (userDto.getRole() != null) user.setRole(userDto.getRole());
 
         UserDto saved = UserDto.fromUser(userRepository.save(user));
         log.info("User: \"{}\" has been updated into DB (old version of user: \"{}\")", saved, user);

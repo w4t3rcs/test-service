@@ -8,19 +8,16 @@ spring:
   datasource:
     username: ${DB_USERNAME}
     password: ${PASSWORD}
-    name: ${DB_NAME}
-    url: jdbc:postgresql://postgresql:5432
+    url: ${DB_URL}
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     show-sql: true
   data:
     redis:
       password: ${PASSWORD}
       ssl:
         enabled: true
-  liquibase:
-    change-log: classpath:/db/changelog/changelog-master.yaml
   mvc:
     hiddenmethod:
       filter:

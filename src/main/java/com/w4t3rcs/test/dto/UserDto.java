@@ -1,6 +1,7 @@
 package com.w4t3rcs.test.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.w4t3rcs.test.entity.Role;
 import com.w4t3rcs.test.entity.User;
 import jakarta.validation.Valid;
 import lombok.Builder;
@@ -14,6 +15,7 @@ public class UserDto {
     private String name;
     private String password;
     private String email;
+    private Role role;
 
     public static UserDto fromUser(@Valid User user) {
         return UserDto.builder()
@@ -21,6 +23,7 @@ public class UserDto {
                 .name(user.getName())
                 .password(user.getPassword())
                 .email(user.getEmail())
+                .role(user.getRole())
                 .build();
     }
 
@@ -31,6 +34,7 @@ public class UserDto {
                 .name(this.getName())
                 .password(this.getPassword())
                 .email(this.getEmail())
+                .role(this.getRole())
                 .build();
     }
 }
