@@ -7,15 +7,17 @@ networks:
     driver: bridge
 
 services:
-  postgresql:
-    image: postgres
+  mysql:
+    image: mysql
     restart: always
-    container_name: test-postgres
+    container_name: test-mysql
     ports:
-      - '5432:5432'
+      - '3306:3306'
     environment:
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${PASSWORD}
     networks:
       - backend
   redis:
@@ -77,19 +79,45 @@ services:
       - "5601:5601"
     networks:
       - backend
+  keycloak:
+    image: quay.io/keycloak/keycloak:20.0.2
+    restart: always
+    container_name: test-keycloak
+    depends_on:
+      mysql:
+        condition: service_started
+    ports:
+      - "8282:8080"
+    environment:
+      KC_DB: mysql
+      KC_DB_PASSWORD: ${PASSWORD}
+      KC_DB_USERNAME: ${DB_USERNAME}
+      KC_DB_URL: ${DB_URL}/${DB_NAME}
+
+      KC_FEATURES: preview
+      KEYCLOAK_ADMIN: ${KEYCLOAK_USERNAME}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_PASSWORD}
+    command: start-dev
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://0.0.0.0:8080/realms/master" ]
+      start_period: 10s
+      interval: 30s
+      retries: 3
+      timeout: 5s
   app:
     build:
       context: .
     container_name: test-service
     depends_on:
-      - postgresql
+      - mysql
       - redis
       - elasticsearch
       - logstash
       - kibana
+      - keycloak
     environment:
       SPRING_PROFILES_ACTIVE: ${ACTIVE_PROFILE}
-      SPRING_DATASOURCE_URL: ${DB_URL}
+      SPRING_DATASOURCE_URL: ${DB_URL}/${DB_NAME}
       SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${PASSWORD}
       SPRING_JPA_HIBERNATE_DDL_AUTO: create

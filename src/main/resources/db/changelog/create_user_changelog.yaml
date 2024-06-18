@@ -8,10 +8,11 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: serial
+                  type: bigint
                   constraints:
                     primaryKey: true
                     nullable: false
+                  autoIncrement: true
               - column:
                   name: name
                   type: varchar(64)

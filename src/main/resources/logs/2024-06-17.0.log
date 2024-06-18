@@ -1,0 +1,79 @@
+2024-06-17 22:20:53,360 INFO org.hibernate.validator.internal.util.Version [background-preinit] HV000001: Hibernate Validator 8.0.1.Final
+2024-06-17 22:20:53,421 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting Application using Java 19.0.1 with PID 13108 (D:\JavaProjects\resume\test-service\target\classes started by 1 in D:\JavaProjects\resume\test-service)
+2024-06-17 22:20:53,422 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v3.2.5, Spring v6.1.6
+2024-06-17 22:20:53,423 INFO org.springframework.boot.SpringApplication [restartedMain] The following 1 profile is active: "dev"
+2024-06-17 22:20:53,488 INFO org.springframework.boot.logging.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-06-17 22:20:53,489 INFO org.springframework.boot.logging.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-06-17 22:20:53,667 INFO org.springframework.boot.docker.compose.lifecycle.DockerComposeLifecycleManager [restartedMain] Using Docker Compose file 'D:\JavaProjects\resume\test-service\docker-compose.yaml'
+2024-06-17 22:21:06,425 INFO org.springframework.boot.docker.compose.lifecycle.DockerComposeLifecycleManager [restartedMain] There are already Docker Compose services running, skipping startup
+2024-06-17 22:21:19,922 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Multiple Spring Data modules found, entering strict repository configuration mode
+2024-06-17 22:21:20,179 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data Elasticsearch repositories in DEFAULT mode.
+2024-06-17 22:21:20,514 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 65 ms. Found 0 Elasticsearch repository interfaces.
+2024-06-17 22:21:20,522 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Multiple Spring Data modules found, entering strict repository configuration mode
+2024-06-17 22:21:20,523 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data Reactive Elasticsearch repositories in DEFAULT mode.
+2024-06-17 22:21:20,524 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 0 ms. Found 0 Reactive Elasticsearch repository interfaces.
+2024-06-17 22:21:20,714 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Multiple Spring Data modules found, entering strict repository configuration mode
+2024-06-17 22:21:20,807 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-17 22:21:20,822 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 1 ms. Found 0 JPA repository interfaces.
+2024-06-17 22:21:21,026 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Multiple Spring Data modules found, entering strict repository configuration mode
+2024-06-17 22:21:21,030 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-06-17 22:21:21,187 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 1 ms. Found 0 Redis repository interfaces.
+2024-06-17 22:22:35,446 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-06-17 22:22:35,743 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-06-17 22:22:35,747 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-06-17 22:22:35,748 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.20]
+2024-06-17 22:22:36,916 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-06-17 22:22:36,918 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 90336 ms
+2024-06-17 22:22:42,893 WARN org.springframework.context.support.AbstractApplicationContext [restartedMain] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: org.postgresql.util.PSQLException: FATAL: no pg_hba.conf entry for host "172.29.0.1", user "root", database "testservicedb", no encryption
+2024-06-17 22:22:42,896 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Stopping service [Tomcat]
+2024-06-17 22:22:43,090 INFO org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLogger [restartedMain] 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-06-17 22:22:43,337 ERROR org.springframework.boot.SpringApplication [restartedMain] Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: org.postgresql.util.PSQLException: FATAL: no pg_hba.conf entry for host "172.29.0.1", user "root", database "testservicedb", no encryption
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1786)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.w4t3rcs.test.Application.main(Application.java:9)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: liquibase.exception.DatabaseException: org.postgresql.util.PSQLException: FATAL: no pg_hba.conf entry for host "172.29.0.1", user "root", database "testservicedb", no encryption
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:288)
+	at org.springframework.boot.autoconfigure.liquibase.DataSourceClosingSpringLiquibase.afterPropertiesSet(DataSourceClosingSpringLiquibase.java:46)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	... 21 common frames omitted
+Caused by: org.postgresql.util.PSQLException: FATAL: no pg_hba.conf entry for host "172.29.0.1", user "root", database "testservicedb", no encryption
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:693)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:203)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:258)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
+	at org.postgresql.Driver.makeConnection(Driver.java:443)
+	at org.postgresql.Driver.connect(Driver.java:297)
+	at org.springframework.jdbc.datasource.SimpleDriverDataSource.getConnectionFromDriver(SimpleDriverDataSource.java:144)
+	at org.springframework.jdbc.datasource.AbstractDriverBasedDataSource.getConnectionFromDriver(AbstractDriverBasedDataSource.java:205)
+	at org.springframework.jdbc.datasource.AbstractDriverBasedDataSource.getConnection(AbstractDriverBasedDataSource.java:169)
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:283)
+	... 24 common frames omitted
+	Suppressed: org.postgresql.util.PSQLException: FATAL: no pg_hba.conf entry for host "172.29.0.1", user "root", database "testservicedb", no encryption
+		at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:693)
+		at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:203)
+		at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:267)
+		... 32 common frames omitted
