@@ -23,12 +23,12 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: ${KEYCLOAK_URL}/realms/${KEYCLOAK_REALM_NAME}
-          jwk-set-uri: ${KEYCLOAK_URL}/realms/${KEYCLOAK_REALM_NAME}/protocol/openid-connect/certs
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: ${KEYCLOAK_URL}/realms/${KEYCLOAK_REALM_NAME}
+#          jwk-set-uri: ${KEYCLOAK_URL}/realms/${KEYCLOAK_REALM_NAME}/protocol/openid-connect/certs
   boot:
     admin:
       client:

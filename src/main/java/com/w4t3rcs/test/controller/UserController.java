@@ -32,7 +32,12 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserDto> postUser(@Valid @RequestBody UserDto userDto) {
-        return ResponseEntity.ok(userService.createUser(userDto));
+        return ResponseEntity.ok(userService.saveUser(userDto));
+    }
+
+    @PostMapping(params = "list")
+    public List<UserDto> postUsers(@Valid @RequestBody List<UserDto> userDtos) {
+        return userService.saveUsers(userDtos);
     }
 
     @PutMapping("/{id}")
