@@ -23,7 +23,13 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
-#  security:
+  ai:
+    openai:
+      api-key: ${OPEN_API_KEY}
+      chat:
+        options:
+          model: gpt-3.5-turbo
+  #  security:
 #    oauth2:
 #      resourceserver:
 #        jwt:
