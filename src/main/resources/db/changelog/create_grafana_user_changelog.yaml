@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: w4t3rcs
+      changes:
+        - sql:
+            endDelimiter: /
+            splitStatements: true
+            stripComments: true
+            sql: CREATE USER 'grafanaReader' IDENTIFIED BY 'password'; GRANT SELECT ON testservicedb.users TO 'grafanaReader'; GRANT SELECT ON testservicedb.relations TO 'grafanaReader';

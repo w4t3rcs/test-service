@@ -7,3 +7,15 @@ datasources:
     isDefault: true
     access: proxy
     editable: true
+  - name: MySQL
+    type: mysql
+    url: mysql://mysql:3306
+    user: grafanaReader
+    jsonData:
+      database: testservicedb
+      maxOpenConns: 100
+      maxIdleConns: 100
+      maxIdleConnsAuto: true
+      connMaxLifetime: 14400
+    secureJsonData:
+      password: password
