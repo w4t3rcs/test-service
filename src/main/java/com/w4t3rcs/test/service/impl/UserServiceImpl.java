@@ -21,15 +21,6 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public List<UserDto> saveUsers(List<UserDto> userDtos) {
-        return userDtos.stream()
-                .map(userDto -> {
-                    User user = userRepository.save(userDto.toUser());
-                    return UserDto.fromUser(user);
-                }).toList();
-    }
-
-    @Override
     @Caching(cacheable = {
             @Cacheable(value = "UserService::getUser", key = "#userDto.id"),
             @Cacheable(value = "UserService::getUser", key = "#userDto.name")

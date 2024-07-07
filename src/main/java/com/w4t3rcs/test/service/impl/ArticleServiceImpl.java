@@ -6,6 +6,7 @@ import com.w4t3rcs.test.repository.ArticleRepository;
 import com.w4t3rcs.test.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ArticleServiceImpl implements ArticleService {
     private final ArticleRepository articleRepository;
+    private final ChatClient chatClient;
 
     @Override
     public ArticleDto createArticle(ArticleDto articleDto) {
@@ -72,6 +74,13 @@ public class ArticleServiceImpl implements ArticleService {
         return articleDto;
     }
 
+    @Override
+    public ArticleDto getAIGeneratedArticle() {
+        return chatClient.prompt()
+                .user("Generate an Article with clever and smart decisions")
+                .call()
+                .entity(ArticleDto.class);
+    }
 
     @Override
     public String deleteArticle(String id) {

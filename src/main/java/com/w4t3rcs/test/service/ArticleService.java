@@ -17,5 +17,7 @@ public interface ArticleService {
 
     ArticleDto getArticleById(String id);
 
+    ArticleDto getAIGeneratedArticle();
+
     String deleteArticle(String id);
 }

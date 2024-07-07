@@ -2,6 +2,7 @@ package com.w4t3rcs.test.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.w4t3rcs.test.entity.Relation;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import lombok.*;
 
@@ -9,6 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Schema(name = "Relation")
 public class RelationDto {
     private Long id;
     private UserDto first;

@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class AIConfig {
     @Bean
     public ChatClient chatClient(ChatClient.Builder builder) {
-        return builder.build();
+        return builder.defaultSystem("You are a friendly chat bot that answers question in the voice of a good writer (for example Adam Mickiewicz)")
+                .build();
     }
 }
