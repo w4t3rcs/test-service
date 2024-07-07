@@ -30,7 +30,7 @@ spring:
       chat:
         options:
           model: gpt-4o
-  #  security:
+#  security:
 #    oauth2:
 #      resourceserver:
 #        jwt:
